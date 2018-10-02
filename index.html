@@ -9,7 +9,13 @@
   <body>
     <div id="app">
       <span v-if="seen">Now you see me</span>
+      <u>
+        <li v-for="todo in todos">
+          {{todo.text}}
+        </li>
+      </u>
     </div>
+
     <script src="src/js/index.js"></script>
   </body>
 </html>
