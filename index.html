@@ -8,12 +8,14 @@
   </head>
   <body>
     <div id="app">
+      <p>{{message}}</p>
       <span v-if="seen">Now you see me</span>
       <u>
         <li v-for="todo in todos">
           {{todo.text}}
         </li>
       </u>
+      <button v-on:click="reverseMessage">Reverse</button>
     </div>
 
     <script src="src/js/index.js"></script>
