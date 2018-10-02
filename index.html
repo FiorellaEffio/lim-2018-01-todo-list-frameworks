@@ -1,25 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>To do list</title>
-    <link rel="stylesheet" href="src/css/index.css">
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>todo-list</title>
   </head>
   <body>
-    <div id="app">
-      <p>{{message}}</p>
-      <span v-if="seen">Now you see me</span>
-      <u>
-        <li v-for="todo in todos">
-          {{todo.text}}
-        </li>
-        <todo-item></todo-item>
-        <todo-item></todo-item>
-      </u>
-      <button v-on:click="reverseMessage">Reverse</button>
-    </div>
-
-    <script src="src/js/index.js"></script>
+    <div id="app"></div>
+    <script src="/dist/build.js"></script>
   </body>
 </html>
