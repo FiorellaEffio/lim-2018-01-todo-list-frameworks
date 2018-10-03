@@ -17,7 +17,7 @@
     <div class="extra-container">
       <div>
         <label>
-          <input type="checkbox">Check All
+          <input type="checkbox" :checked="!anyRemaining">Check All
         </label>
       </div>
       <div>
@@ -54,6 +54,9 @@ export default {
   computed: {
     remaining() {
       return this.todos.filter(todo => !todo.completed).length
+    },
+    anyRemaining() {
+      return this.remaining != 0
     }
   },
   directives: {
