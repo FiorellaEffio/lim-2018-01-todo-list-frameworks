@@ -1,28 +1,28 @@
 <template>
   <div>
-    <input type="text" class="todo-input" placeholder="What needs to be done?"
+    <input type="text" class="todo-input" placeholder="¿Qué necesitas hacer?"
     v-model="newTodo" @keyup.enter="addTodo">
-    <todo-item v-for="(todo,index) in todosFiltered" :key="todo.id" :todo="todo" :index="index">
+    <todo-item v-for="(todo,index) in todosFiltered" :key="todo.id" :todo="todo" :index="index" :checkAll="!anyRemaining" @removedTodo="removeTodo" @finishedEdit="finishedEdit">
     </todo-item>
     <!-- Container for completed, not completed and all the todos -->
     <div class="extra-container">
       <div>
         <label>
-          <input type="checkbox" :checked="!anyRemaining" @change="checkAllTodos">Check All
+          <input type="checkbox" :checked="!anyRemaining" @change="checkAllTodos">Marcar todos
         </label>
       </div>
       <div>
-        {{ remaining }} items left
+        {{ remaining }} tareas pendientes
       </div>
     </div>
     <div class="extra-container">
       <div>
-        <button :class="{ active: filter == 'all'}" @click="filter = 'all'">All</button>
-        <button :class="{ active: filter == 'active'}" @click="filter = 'active'">Active</button>
-        <button :class="{ active: filter == 'completed'}" @click="filter = 'completed'">Completed</button>
+        <button :class="{ active: filter == 'all'}" @click="filter = 'all'">Todos</button>
+        <button :class="{ active: filter == 'active'}" @click="filter = 'active'">Activos</button>
+        <button :class="{ active: filter == 'completed'}" @click="filter = 'completed'">Completados</button>
       </div>
       <div>
-        <button v-if="showClearCompletedButton" @click="clearCompleted">Clear Completed</button>
+        <button v-if="showClearCompletedButton" @click="clearCompleted">Eliminar Completados</button>
       </div>
     </div>
   </div>
@@ -39,19 +39,25 @@ export default {
   data () {
     return {
       newTodo: '',
-      idForTodo: 3,
+      idForTodo: 4,
       beforeEditCache: '',
       filter: 'all',
       todos: [
         {
           'id': 1,
-          'title': 'Finish Vue Screenshot',
+          'title': 'Terminar proyecto',
           'completed': false,
           'editing': false,
         },
         {
           'id': 2,
-          'title': 'Take over world',
+          'title': 'Comprar arroz',
+          'completed': false,
+          'editing': false,
+        },
+        {
+          'id': 3,
+          'title': 'Arreglar el foco del baño',
           'completed': false,
           'editing': false,
         }
@@ -125,6 +131,9 @@ export default {
     },
     clearCompleted() {
       this.todos = this.todos.filter(todo => !todo.completed)
+    },
+    finishedEdit(data) {
+      this.todos.splice(data.index, 1, data.todo)
     }
   }
 }
