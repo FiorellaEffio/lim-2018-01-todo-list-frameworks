@@ -51,6 +51,11 @@ export default {
       ]
     }
   },
+  computed: {
+    remaining() {
+      return this.todos.filter(todo => !todo.completed).length
+    }
+  },
   directives: {
     focus: {
       inserted: function (el) {
